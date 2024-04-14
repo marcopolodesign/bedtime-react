@@ -66,6 +66,7 @@ const [name, setName] = useState('');
       "frequency_penalty": 0, 
     });
 
+    console.log (import.meta.env.VITE_OPEN_AI_KEY)
 
     let config = {
       method: 'post',
