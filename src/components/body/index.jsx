@@ -13,14 +13,15 @@ const [name, setName] = useState('');
   const [length, setLength] = useState('Duración');
   const [language, setLanguage] = useState('Seleccioná un idioma');
   const [story, setStory] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const [hasStory, setHasStory] = useState(false);
 
   const generateStory = async (e) => {
 
     e.preventDefault();
+    setIsLoading(true);
     let maxTokens = length === 'short' ? 250 : length === 'medium' ? 500 : length === 'long' ? 1000 : 0;
-
 
     const prompt =
         language === 'spanish' ? `Crea una encantadora historia para dormir adaptada a la imaginación de un niño de ${age} años, incorporando los siguientes elementos, con un total de ${maxTokens} palabras:
@@ -84,7 +85,14 @@ const [name, setName] = useState('');
     .then((response) => {
       console.log(response.data)
       console.log(response.data.choices[0].message.content)
-      setStory(response.data.choices[0].message.content);
+      const separateContent = () => {
+        const paragraphs = response.data.choices[0].message.content.split('\n\n');
+        return paragraphs.map((paragraph, index) => (
+          <p key={index} className="leading-relaxed mb-5">{paragraph}</p>
+        ));
+      };
+      setStory(separateContent());
+      setIsLoading(false);
       setHasStory(true);
     })
     .catch((error) => {
@@ -121,28 +129,33 @@ const [name, setName] = useState('');
             </select>
      
             <select value={language} onChange={(e) => setLanguage(e.target.value)} required>
-                <option value="select" disabled defaultValue>Seleccioná un idioma</option>
-                <option value="english">English</option>
+                <option disabled defaultValue>Seleccioná un idioma</option>
                 <option value="spanish">Spanish</option>
+                <option value="english">English</option>
+           
             </select>
            
             
             <button className="bg-[#FFE54D] p-2 font-medium rounded-full mt-3 flex justify-between items-center px-3 w-100" type="submit">
-                Generate Story
+               Generar cuento
                 <img src={arrowLeft} alt="My SVG" />    
             </button>
         </form>
-        <div className={`fixed w-100 h-100 top-0 left-[50%] translate-x-[-50%] bg-white p-12 min-h-[100vh] w-[768px] mx-auto flex flex-col  ${hasStory ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} id="story">
+
+        <div className="fixed w-screen h-screen bg-transparent top-0 left-0 z-10 flex justify-center items-center loading" style={{display: isLoading ? 'flex' : 'none'}}></div>
+
+        <div className={`fixed w-100 h-screen overflow-y-scroll top-0 left-[50%] translate-x-[-50%] bg-white p-12 min-h-[100vh] w-screen max-w-[768px] mx-auto flex flex-col  ${hasStory ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} id="story">
 
             <p className='flex items-center gap-2 ml-auto mr-0 cursor-pointer mb-5' 
                 onClick={() => setHasStory(false)}>
                 Cerrar 
                 <img src={close} alt="My SVG" />    
             </p>
-            <p className=''>{story}</p>
+            <div>{story}</div>
             
         </div>
     </div>
+
   )
 }
 

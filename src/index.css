@@ -19,14 +19,6 @@ body {
     font-family: 'Messina', sans-serif;
 }
 
-.form-container input {
-    /* border-radius: 2px;
-    border: 1px solid #000;
-    background-color: unset;
-    padding: 6px 10px;
-    margin-bottom: 20px; */
-}
-
 .form-container input::placeholder {
 color: #000;
 }
@@ -47,7 +39,11 @@ color: #000;
     box-sizing: inherit;
     width: inherit;
     height: inherit;
+}
 
+
+
+.form-container select {
      /* Add arrow down icon */
      background-image: url('./assets/arrow-down.svg');
      background-repeat: no-repeat;
@@ -56,4 +52,30 @@ color: #000;
 }
 
 
+.loading {
+    width: 250vw;
+    height: 200vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 
+
+@keyframes sge-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.loading::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    background: radial-gradient(farthest-corner at bottom left, #ffeed9, transparent), radial-gradient(farthest-corner at top left, #ff631a, transparent), radial-gradient(farthest-side at top right, #ffede7, transparent), radial-gradient(farthest-corner at bottom right, #f1963b, transparent);
+    height: 300%;
+    animation: 4s linear infinite sge-spin;
+}
