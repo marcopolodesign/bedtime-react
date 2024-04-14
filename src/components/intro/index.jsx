@@ -14,7 +14,7 @@ export default function index() {
             </TypeIt> antes de dormir.
           </h1> 
 
-          <p className="mt-1 text-l">Dale un respiro a tu imaginación. Completá la información y recibí un cuento corto para tu hijo antes de dormir. No recomendado para uso diario.</p>
+          <p className="mt-1 text-l">Dale un respiro a tu imaginación. Completá el formulario y recibí un cuento corto para tu hijo antes de dormir.</p>
 
     </div>
   )

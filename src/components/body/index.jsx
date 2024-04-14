@@ -25,9 +25,8 @@ const [name, setName] = useState('');
         language === 'spanish' ? `Crea una encantadora historia para dormir adaptada a la imaginación de un niño de ${age} años, incorporando los siguientes elementos, con un total de ${maxTokens} palabras:
 
         1. Nombre del personaje principal: ${name}
-        2. Nombre del mejor amigo: ${friendName}
+        ${friendName ? ` 2. Nombre del mejor amigo: ${friendName}` : ''}
         3. Tema de la aventura: ${theme}
-        
         Tu tarea es crear una narrativa que transporte las mentes jóvenes a mundos mágicos y las deje soñando con aventuras por venir. Aprovecha el tema elegido para inspirar la creatividad y capturar la esencia del asombro infantil.
         
         Ten en cuenta la edad del público y busca una historia que sea apropiada para su edad y esté llena de mensajes positivos. Fomenta la imaginación, la amistad y el coraje, y deja espacio para que los corazones jóvenes vuelen alto.
@@ -38,7 +37,7 @@ const [name, setName] = useState('');
         `Create an enchanting bedtime story tailored for a child's of age ${age} imagination, incorporating the following elements, woth a total of ${maxTokens} words:
 
         1. Main Character's Name: ${name}
-        2. Best Friend's Name: ${friendName}
+        ${friendName ? ` 2. Best Friend's Name: ${friendName}` : ''}
         3. Adventure Theme: ${theme}
         
         Your task is to craft a narrative that transports young minds to magical worlds and leaves them dreaming of adventures yet to come. Embrace the chosen theme to spark creativity and capture the essence of childhood wonder.
@@ -100,8 +99,8 @@ const [name, setName] = useState('');
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} required placeholder="El nombre de tu hijo:"/>
 
         
-            <input type="text" placeholder="Age: " value={age} onChange={(e) => setAge(e.target.value)} required />
-            <input type="text" value={friendName} placeholder="Nombre del amigo:" onChange={(e) => setFriendName(e.target.value)} required />
+            <input type="text" placeholder="Edad: " value={age} onChange={(e) => setAge(e.target.value)} required />
+            <input type="text" value={friendName} placeholder="Nombre del amigo:" onChange={(e) => setFriendName(e.target.value)} />
          
             <select value={theme} onChange={(e) => setTheme(e.target.value)} required>
                 <option disabled defaultValue>Seleccioná un tema</option>
