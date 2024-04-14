@@ -3,6 +3,7 @@ import axios from 'axios';
 import arrowLeft from '../../assets/arrow-left.svg';
 import close from '../../assets/close.svg';
 
+
 const Body = () => {
 
 const [name, setName] = useState('');
