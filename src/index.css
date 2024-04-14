@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@font-face {
+    font-family: 'Messina';
+    src: url('./assets/fonts/MessinaSansWeb-Regular.woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: 'Messina';
+    src: url('./assets/fonts/MessinaSansWeb-Light.woff2');
+    font-weight: 200;
+}
+
+body {
+    font-family: 'Messina', sans-serif;
+}
+
+.form-container input {
+    /* border-radius: 2px;
+    border: 1px solid #000;
+    background-color: unset;
+    padding: 6px 10px;
+    margin-bottom: 20px; */
+}
+
+.form-container input::placeholder {
+color: #000;
+}
+
+.form-container select, .form-container input {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 4px;
+    border: 1px solid #000;
+    background-color: unset;
+    padding: 6px 10px;
+    margin-bottom: 15px;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    outline: inherit;
+    box-sizing: inherit;
+    width: inherit;
+    height: inherit;
+
+     /* Add arrow down icon */
+     background-image: url('./assets/arrow-down.svg');
+     background-repeat: no-repeat;
+     background-position: 97% center;
+     padding-right: 20px !important; 
+}
+
+
+
