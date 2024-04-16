@@ -2,6 +2,8 @@ import { useState } from 'react';
 import axios from 'axios';
 import arrowLeft from '../../assets/arrow-left.svg';
 import close from '../../assets/close.svg';
+import { FormattedMessage } from 'react-intl';
+
 
 
 const Body = () => {
@@ -103,7 +105,7 @@ const [name, setName] = useState('');
   
   return (
     <div className="bg-[#FFBAC3] rounded-xl p-6 form-container mt-7">
-        <h2 className='text-2xl mb-5'>Completá tus datos</h2>
+        <h2 className='text-2xl mb-5'><FormattedMessage id="fill-data" /></h2>
         <form className="flex flex-col" onSubmit={generateStory}>   
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} required placeholder="El nombre de tu hijo:"/>
 
@@ -112,7 +114,7 @@ const [name, setName] = useState('');
             <input type="text" value={friendName} placeholder="Nombre del amigo:" onChange={(e) => setFriendName(e.target.value)} />
          
             <select value={theme} onChange={(e) => setTheme(e.target.value)} required>
-                <option disabled defaultValue>Seleccioná un tema</option>
+                <option disabled defaultValue><FormattedMessage id="theme-select" /></option>
                 <option value="superhero">Superhero</option>
                 <option value="soccer-player">Soccer Player</option>
                 <option value="astronaut">Astronaut</option>
