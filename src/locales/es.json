@@ -6,6 +6,16 @@
     "pirate": "Pirata",
     "heading-ending" : "antes de dormir",
     "intro-p": "Dale un respiro a tu imaginación. Completá el formulario y recibí un cuento corto para tu hijo antes de dormir.",
- "fill-data": "Completá tus datos",
- "theme-select" : "Seleccioná una historia"
+    "fill-data": "Completá tus datos",
+    "name-select" : "Nombre de tu hijo",
+    "age-select" : "Edad",
+    "friend-select" : "El nombre de su amigo (opcional)",
+    "theme-select" : "Seleccioná una historia", 
+    "duration-select": "Duración",
+    "short-placeholder": "Cuento corto",
+    "medium-placeholder": "Cuento mediano",
+    "long-placeholder": "Cuento largo",
+    "generate" : "Generar cuento", 
+    "close" : "Cerrar"
+
   }

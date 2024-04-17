@@ -6,6 +6,15 @@
     "pirate": "Pirate",
     "heading-ending" : "before bedtime.",
     "intro-p": "Give your imagination a break. Fill out the form and receive a short bedtime story for your child.",
-"fill-data" : "Fill in your information",
-"theme-select" : "Select a theme"
+    "name-select" : "Name of your child",
+    "age-select" : "Age",
+    "fill-data" : "Fill in your information",
+    "friend-select" : "Friend's name (optional)",
+    "theme-select" : "Select a theme", 
+    "duration-select": "Duration",
+    "short-placeholder": "Short Story",
+    "medium-placeholder": "Medium Story",
+    "long-placeholder": "Long Story", 
+    "generate" : "Generate Story",
+    "close" : "Close"
   }

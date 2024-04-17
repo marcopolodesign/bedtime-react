@@ -1,19 +1,42 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import arrowLeft from '../../assets/arrow-left.svg';
 import close from '../../assets/close.svg';
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 
 
 
-const Body = () => {
+const Body = ({currentLanguage}) => {
+  const intl = useIntl();
+  const namePlaceholder = intl.formatMessage({ id: 'name-select' });
+  const agePlaceholder = intl.formatMessage({ id: 'age-select' });
+  const friendPlaceholder = intl.formatMessage({ id: 'friend-select' });
+  const themePlaceholder = intl.formatMessage({ id: 'theme-select' });
 
-const [name, setName] = useState('');
+  const durationPlaceholder = intl.formatMessage({ id: 'duration-select' });
+  const shortPlaceholder = intl.formatMessage({ id: 'short-placeholder' });
+  const mediumPlaceholder = intl.formatMessage({ id: 'medium-placeholder' });
+  const longPlaceholder = intl.formatMessage({ id: 'long-placeholder' });
+
+
+  
+
+  const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [friendName, setFriendName] = useState('');
-  const [theme, setTheme] = useState('Seleccioná un tema');
-  const [length, setLength] = useState('Duración');
-  const [language, setLanguage] = useState('Seleccioná un idioma');
+
+  const [theme, setTheme] = useState(themePlaceholder);
+  useEffect(() => {
+    setTheme(themePlaceholder);
+  }, [themePlaceholder]);
+
+  const [length, setLength] = useState(durationPlaceholder);
+
+  useEffect(() => {
+    setLength(durationPlaceholder);
+  }, [durationPlaceholder]);
+
   const [story, setStory] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -26,7 +49,7 @@ const [name, setName] = useState('');
     let maxTokens = length === 'short' ? 250 : length === 'medium' ? 500 : length === 'long' ? 1000 : 0;
 
     const prompt =
-        language === 'spanish' ? `Crea una encantadora historia para dormir adaptada a la imaginación de un niño de ${age} años, incorporando los siguientes elementos, con un total de ${maxTokens} palabras:
+        currentLanguage === 'es' ? `Crea una encantadora historia para dormir adaptada a la imaginación de un niño de ${age} años, incorporando los siguientes elementos, con un total de ${maxTokens} palabras:
 
         1. Nombre del personaje principal: ${name}
         ${friendName ? ` 2. Nombre del mejor amigo: ${friendName}` : ''}
@@ -107,50 +130,48 @@ const [name, setName] = useState('');
     <div className="bg-[#FFBAC3] rounded-xl p-6 form-container mt-7">
         <h2 className='text-2xl mb-5'><FormattedMessage id="fill-data" /></h2>
         <form className="flex flex-col" onSubmit={generateStory}>   
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} required placeholder="El nombre de tu hijo:"/>
-
-        
-            <input type="text" placeholder="Edad: " value={age} onChange={(e) => setAge(e.target.value)} required />
-            <input type="text" value={friendName} placeholder="Nombre del amigo:" onChange={(e) => setFriendName(e.target.value)} />
+            <input type="text" value={name} onChange={(e) => setName(e.target.value)} required placeholder={namePlaceholder}/>
+            <input type="text" placeholder={`${agePlaceholder}:`} value={age} onChange={(e) => setAge(e.target.value)} required />
+            <input type="text" value={friendName} placeholder={`${friendPlaceholder}:`} onChange={(e) => setFriendName(e.target.value)} />
          
             <select value={theme} onChange={(e) => setTheme(e.target.value)} required>
-                <option disabled defaultValue><FormattedMessage id="theme-select" /></option>
+                <option disabled defaultValue>{themePlaceholder}</option>
                 <option value="superhero">Superhero</option>
                 <option value="soccer-player">Soccer Player</option>
                 <option value="astronaut">Astronaut</option>
                 <option value="race-driver">Race Driver</option>
                 <option value="race-driver">Love Story</option>
             </select>
-     
+    
          
             <select value={length} onChange={(e) => setLength(e.target.value)} required>
-                <option value="Duración" disabled defaultValue>Duración: </option>
-                <option value="short">Short</option>
-                <option value="medium">Medium</option>
-                <option value="long">Long</option>
+              <option disabled defaultValue>{durationPlaceholder}</option>
+              <option value="short">{shortPlaceholder}</option>
+              <option value="medium">{mediumPlaceholder}</option>
+              <option value="long">{longPlaceholder}</option>
             </select>
-     
-            <select value={language} onChange={(e) => setLanguage(e.target.value)} required>
-                <option disabled defaultValue>Seleccioná un idioma</option>
+            {/* <select value={language} onChange={(e) => setLanguage(e.target.value)} required>
+                <option value="" disabled defaultValue>Seleccioná un idioma</option>
                 <option value="spanish">Spanish</option>
-                <option value="english">English</option>
-           
-            </select>
+                <option value="english">English</option>    
+            </select> */}
            
             
-            <button className="bg-[#FFE54D] p-2 font-medium rounded-full mt-3 flex justify-between items-center px-3 w-100" type="submit">
-               Generar cuento
-                <img src={arrowLeft} alt="My SVG" />    
+            <button className="loading generate-button relative overflow-hidden p-2 font-medium rounded-full mt-3 flex justify-between items-center px-3 w-[max-content] gap-3" type="submit">
+               <p className="z-20"><FormattedMessage id="generate" /></p>
+                <img className="relative z-20" src={arrowLeft} alt="My SVG" />    
             </button>
         </form>
 
-        <div className="fixed w-screen h-screen bg-transparent top-0 left-0 z-10 flex justify-center items-center loading" style={{display: isLoading ? 'flex' : 'none'}}></div>
+        <div className="fixed w-screen h-screen bg-transparent top-0 left-0 z-10 flex justify-center items-center loading" style={{display: isLoading ? 'flex' : 'none'}}>
+          <h2 className="m-auto">Loading</h2>
+        </div>
 
         <div className={`fixed w-100 h-screen overflow-y-scroll top-0 left-[50%] translate-x-[-50%] bg-white p-12 min-h-[100vh] w-screen max-w-[768px] mx-auto flex flex-col  ${hasStory ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} id="story">
 
             <p className='flex items-center gap-2 ml-auto mr-0 cursor-pointer mb-5' 
                 onClick={() => setHasStory(false)}>
-                Cerrar 
+                <FormattedMessage id="close" />
                 <img src={close} alt="My SVG" />    
             </p>
             <div>{story}</div>
@@ -163,3 +184,8 @@ const [name, setName] = useState('');
 
 
 export default Body;
+
+
+Body.propTypes = {
+  currentLanguage: PropTypes.string.isRequired,
+};

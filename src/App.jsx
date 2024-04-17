@@ -31,7 +31,7 @@ function App() {
 
       <Header currentLanguage={currentLanguage} setCurrentLanguage={setCurrentLanguage} />
       <Intro currentLanguage={currentLanguage} />
-      <Body />
+      <Body  currentLanguage={currentLanguage}/>
       
   
     </div>

@@ -52,7 +52,7 @@ color: #000;
 }
 
 
-.loading {
+.loading:not(.generate-button) {
     width: 250vw;
     height: 200vh;
     top: 50%;
@@ -74,8 +74,10 @@ color: #000;
 .loading::before {
     content: "";
     position: absolute;
-    width: 100%;
-    background: radial-gradient(farthest-corner at bottom left, #ffeed9, transparent), radial-gradient(farthest-corner at top left, #ff631a, transparent), radial-gradient(farthest-side at top right, #ffede7, transparent), radial-gradient(farthest-corner at bottom right, #f1963b, transparent);
-    height: 300%;
+    width: 120%;
+    background: radial-gradient(farthest-corner at bottom left, hsl(209.36deg 69.32% 88.16%), transparent), radial-gradient(farthest-corner at top left, hsl(210 100% 55% / 1), transparent), radial-gradient(farthest-side at top right, #ffede7, transparent), radial-gradient(farthest-corner at bottom right, hsl(261.49deg 87% 59%), transparent);
+    height: 500%;
     animation: 4s linear infinite sge-spin;
+    z-index: 1;
+    left: -10%;
 }
