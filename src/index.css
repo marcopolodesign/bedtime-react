@@ -81,3 +81,8 @@ color: #000;
     z-index: 1;
     left: -10%;
 }
+
+
+.smooth-t {
+   transition: all 0.45s cubic-bezier(0.4, 0, 0, 1);
+}

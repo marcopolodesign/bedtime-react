@@ -158,16 +158,16 @@ const Body = ({currentLanguage}) => {
            
             
             <button className="loading generate-button relative overflow-hidden p-2 font-medium rounded-full mt-3 flex justify-between items-center px-3 w-[max-content] gap-3" type="submit">
-               <p className="z-20"><FormattedMessage id="generate" /></p>
+               <p className="z-20">{isLoading ? 'Loading...' : <FormattedMessage id="generate" />}</p>
                 <img className="relative z-20" src={arrowLeft} alt="My SVG" />    
             </button>
         </form>
 
-        <div className="fixed w-screen h-screen bg-transparent top-0 left-0 z-10 flex justify-center items-center loading" style={{display: isLoading ? 'flex' : 'none'}}>
+        {/* <div className="fixed w-screen h-screen bg-transparent top-0 left-0 z-10 flex justify-center items-center loading" style={{display: isLoading ? 'flex' : 'none'}}>
           <h2 className="m-auto">Loading</h2>
-        </div>
+        </div> */}
 
-        <div className={`fixed w-100 h-screen overflow-y-scroll top-0 left-[50%] translate-x-[-50%] bg-white p-12 min-h-[100vh] w-screen max-w-[768px] mx-auto flex flex-col  ${hasStory ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} id="story">
+        <div className={`fixed w-100 h-screen overflow-y-scroll top-0 left-[50%] translate-x-[-50%] bg-white p-12 min-h-[100vh] w-screen max-w-[768px] mx-auto flex flex-col z-200  smooth-t z-50 pb-36 ${hasStory ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} id="story">
 
             <p className='flex items-center gap-2 ml-auto mr-0 cursor-pointer mb-5' 
                 onClick={() => setHasStory(false)}>
